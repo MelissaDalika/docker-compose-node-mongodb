@@ -1,0 +1,24 @@
+version: "2"
+
+services: 
+  web:
+    container_name: exampleapp
+    restart: always
+    build: .
+    ports: 
+      - "5000:3000"
+    links: 
+      - mongo
+    volumes: 
+      - .:/usr/src/app 
+
+  mongo:
+    container_name: mymongodatabase
+    image: mongo
+    ports: 
+      - "27017:27017"
+    logging:
+      driver: none 
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password 
